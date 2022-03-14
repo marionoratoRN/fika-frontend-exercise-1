@@ -4,7 +4,7 @@ import {TagComponent} from '../Tag';
 
 interface MovieCardComponentProps {
   title: string;
-  genres: string[];
+  genres: (string | undefined)[];
   posterImage: string;
 }
 

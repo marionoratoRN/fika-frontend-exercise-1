@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View} from 'react-native';
 
 interface GenresComponentProps {
-  genres: string[];
+  genres: (string | undefined)[];
 }
 
 export const TagComponent: React.FC<GenresComponentProps> = ({genres}) => {

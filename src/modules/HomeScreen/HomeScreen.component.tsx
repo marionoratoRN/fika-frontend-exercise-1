@@ -1,21 +1,14 @@
-import React from 'react';
-import {FlatList} from 'react-native';
+import React, {useEffect} from 'react';
+import {FlatList, View} from 'react-native';
 import {useMovies} from '../../hooks/useMovies';
 import {Movie} from '../../services/types';
 import {MovieCardComponent} from './components/MovieCard';
+import {HeaderComponent} from './components/HeaderComponent';
 
 export const HomeScreenComponent: React.FC = () => {
-  const movies = useMovies();
+  const {movies, setQuery} = useMovies();
   const renderMovieCard = ({item}: {item: Movie}) => {
-    const {
-      title,
-      overview,
-      posterImage,
-      releaseDate,
-      voteAverage,
-      voteCount,
-      genres,
-    } = item;
+    const {title, posterImage, genres} = item;
     return (
       <MovieCardComponent
         title={title}
@@ -25,11 +18,13 @@ export const HomeScreenComponent: React.FC = () => {
     );
   };
   return (
-    <FlatList<Movie>
-      contentContainerStyle={{padding: 10}}
-      data={movies}
-      renderItem={renderMovieCard}
-      keyExtractor={item => item.id}
-    />
+    <View style={{padding: 10}}>
+      <HeaderComponent onMovieChange={setQuery} />
+      <FlatList<Movie>
+        data={movies}
+        renderItem={renderMovieCard}
+        keyExtractor={item => item.id}
+      />
+    </View>
   );
 };

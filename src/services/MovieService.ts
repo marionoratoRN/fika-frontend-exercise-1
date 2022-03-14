@@ -6,7 +6,7 @@ interface GenreResponse {
   name: string;
 }
 
-interface MovieResponse {
+export interface MovieResponse {
   genre_ids: number[];
   id: number;
   overview: string;
@@ -59,6 +59,27 @@ class MovieService {
       console.log('Error fetching the genres', e);
     }
   };
+
+  findMovies: (query: string) => Promise<MovieResponse[] | undefined> =
+    async query => {
+      try {
+        const {data} = await instance.get<{results: MovieResponse[]}>(
+          'search/movie',
+          {
+            params: {
+              api_key: apiKey,
+              language: 'en-US',
+              page: '1',
+              include_adult: false,
+              query,
+            },
+          },
+        );
+        return data?.results;
+      } catch (e) {
+        console.log('Error in finding the movies', e);
+      }
+    };
 }
 
 export default new MovieService();

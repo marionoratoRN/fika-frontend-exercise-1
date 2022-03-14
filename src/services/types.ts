@@ -5,6 +5,6 @@ export interface Movie {
   releaseDate: string;
   voteAverage: number;
   voteCount: number;
-  genres: string[];
+  genres: (string | undefined)[];
   id: string;
 }
