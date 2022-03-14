@@ -5,8 +5,6 @@ export interface Movie {
   releaseDate: string;
   voteAverage: number;
   voteCount: number;
-  genres: Genre[];
+  genres: string[];
   id: string;
 }
-
-export interface Genre {}
